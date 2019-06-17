@@ -1,0 +1,26 @@
+{
+  "name": "PropertyPro-lite-master",
+  "version": "1.0.0",
+  "description": "Andela developer challenge (Bootcamp)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Muhire-Josue/PropertyPro-lite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Muhire-Josue/PropertyPro-lite/issues"
+  },
+  "homepage": "https://github.com/Muhire-Josue/PropertyPro-lite#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}
