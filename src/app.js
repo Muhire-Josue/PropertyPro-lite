@@ -22,14 +22,14 @@ app.post("/signup/api/v1/", (req, res) => {
     newUser.token = token
     newUser.id = user.length + 1;
     user.push(newUser);
-    res.send({ status: "success", data: user, token: token })
+    res.send({ status: "success", data: user, token: token });
 });
 
 
 
 //User signin
 app.post("/signin/api/v1/", (req, res) => {
-    const currentUser = user.find(u => u.email === req.body.email)
+    const currentUser = user.find(u => u.email === req.body.email);
     if (currentUser.password === req.body.password) {
         let token = generateToken(currentUser);
         res.send({ status: "success", data: currentUser, token: token });
