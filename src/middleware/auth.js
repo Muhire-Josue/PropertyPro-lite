@@ -1,22 +1,31 @@
+const jwt = require("jsonwebtoken");
 
-const User = require("../model/user")
 
 const auth = (req, res, next) => {
-    try {
-        const token = req.header('Authorization').replace('Bearer ', '')
-        
-        const user = User.find(u=>u.token === token)
+    const bearerHeader = req.headers['authorization'];
+    if (typeof bearerHeader !== undefined) {
 
-        if (!user) {
-            throw new Error()
-        }
+        const bearer = bearerHeader.split(' ');
+        const bearerToken = bearer[1];
+        req.token = bearerToken;
+        jwt.verify(req.token, 'apisecretkey', (error, data)=>{
+            if(error){
+                throw new Error("Authentication failed");
+            } else {
+                req.user = data;
+            }
+        });
+        next();
 
-        req.token = token
-        req.user = user
-        next()
-    } catch (e) {
-        res.status(401).send({ error: 'Please authenticate.' })
+    } else {
+        res.status(403).send("Auth failed")
     }
 }
 
-module.exports = auth
+//generates tokens
+const generateToken = (thisUser) => {
+    const token = jwt.sign({ thisUser }, "apisecretkey");
+    return token
+}
+
+module.exports = {auth, generateToken}
